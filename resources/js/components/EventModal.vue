@@ -9,9 +9,9 @@
                         <label>Nazwa wydarzenia</label>
                         <input type="text" class="form-control w-100" placeholder="nazwa" v-model.trim="$v.event.name.$model"/>
                         <div v-if="$v.event.name.$dirty && submitted">
-                            <small class=" text-danger" v-if="!$v.event.name.required">To pole jest wymagane</small>
-                            <small class=" text-danger" v-if="!$v.event.name.minLength">Zbyt krótkie, minimum 4 znaki</small>
-                            <small class=" text-danger" v-if="!$v.event.name.maxLength">Zbyt długie, maximum 30 znaków</small>
+                            <small class=" text-danger d-block" v-if="!$v.event.name.required">To pole jest wymagane</small>
+                            <small class=" text-danger d-block" v-if="!$v.event.name.minLength">Zbyt krótkie, minimum 4 znaki</small>
+                            <small class=" text-danger d-block" v-if="!$v.event.name.maxLength">Zbyt długie, maximum 30 znaków</small>
                         </div>
                     </div>
                     <div class="form-group">
@@ -21,7 +21,7 @@
                             <option v-for="course in coursesAsTeacher" :key="course.id" :value="course.id">{{course.name}}</option>
                         </select>
                         <div v-if="$v.event.id.$dirty && submitted">
-                            <small class=" text-danger" v-if="!$v.event.id.required">To pole jest wymagane</small>
+                            <small class=" text-danger d-block" v-if="!$v.event.id.required">To pole jest wymagane</small>
                         </div>
                     </div>
 
@@ -30,29 +30,29 @@
                             <label>Data: </label>
                             <flat-pickr v-model.trim="$v.day.$model" :config="configDay" class="form-control" placeholder="Wybierz dzień"></flat-pickr>
                             <div v-if="$v.day.$dirty && submitted">
-                                <small class=" text-danger" v-if="!$v.day.required">To pole jest wymagane</small>
+                                <small class=" text-danger d-block" v-if="!$v.day.required">To pole jest wymagane</small>
                             </div>
                         </div>
                         <div class="form-group col-6 col-sm-4">
                             <label>Czas rozpoczęcia: </label>
                             <flat-pickr v-model.trim="$v.event.start_time.$model" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
                             <div v-if="$v.event.start_time.$dirty && submitted">
-                                <small class=" text-danger" v-if="!$v.event.start_time.required">To pole jest wymagane</small>
+                                <small class=" text-danger d-block" v-if="!$v.event.start_time.required">To pole jest wymagane</small>
                             </div>
                         </div>
                         <div class="form-group col-6 col-sm-4">
                             <label>Czas zakończenia:</label>
                             <flat-pickr v-model.trim="$v.event.end_time.$model" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
                             <div v-if="$v.event.end_time.$dirty && submitted">
-                                <small class=" text-danger" v-if="!$v.event.end_time.required">To pole jest wymagane</small>
-                                <small class=" text-danger" v-if="!$v.event.end_time.notTooEarly">Godzina zakończenia nie może być wcześniejsza niż {{event.start_time}}</small>
+                                <small class=" text-danger d-block" v-if="!$v.event.end_time.required">To pole jest wymagane</small>
+                                <small class=" text-danger d-block" v-if="!$v.event.end_time.notTooEarly">Godzina zakończenia nie może być wcześniejsza niż {{event.start_time}}</small>
                             </div>
                         </div>
                     </div>
                     <div class="form-group mt-3">
                         <input type="text" class="form-control w-100" placeholder="Dodatkowe informacje" v-model.trim="$v.event.note.$model"/>
                         <div v-if="$v.event.note.$dirty && submitted">
-                            <small class=" text-danger" v-if="!$v.event.note.maxLength">Zbyt długie, maximum 256 znaków</small>
+                            <small class=" text-danger d-block" v-if="!$v.event.note.maxLength">Zbyt długie, maximum 256 znaków</small>
 
                         </div>
                     </div>

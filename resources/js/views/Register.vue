@@ -5,9 +5,9 @@
                 <label for="name" >Imię i nazwisko: </label>
                 <input type="text" v-model.trim="$v.form.name.$model" class="form-control "  placeholder="Imię i nazwisko">
                 <div v-if="$v.form.name.$dirty && submitted">
-                    <small class=" text-danger" v-if="!$v.form.name.required">To pole jest wymagane</small>
-                    <small class=" text-danger" v-if="!$v.form.name.minLength">Zbyt krótkie, minimum 4 znaki</small>
-                    <small class=" text-danger" v-if="!$v.form.name.maxLength">Zbyt długie, maximum 30 znaków</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.name.required">To pole jest wymagane</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.name.minLength">Zbyt krótkie, minimum 4 znaki</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.name.maxLength">Zbyt długie, maximum 30 znaków</small>
                 </div>
             </div>
 
@@ -15,10 +15,10 @@
                 <label for="email" >Email: </label>
                 <input  v-model.trim="$v.form.email.$model" class="form-control "  placeholder="Email">
                 <div v-if="$v.form.email.$dirty && submitted">
-                    <small class=" text-danger" v-if="!$v.form.email.required">To pole jest wymagane</small>
-                    <small class=" text-danger" v-if="!$v.form.email.email">Proszę podać prawidłowy email</small>
-                    <small class=" text-danger" v-if="!$v.form.email.minLength">Zbyt krótkie, minimum 6 znaków</small>
-                    <small class=" text-danger" v-if="!$v.form.email.maxLength">Zbyt długie, maximum 30 znaków</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.email.required">To pole jest wymagane</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.email.email">Proszę podać prawidłowy email</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.email.minLength">Zbyt krótkie, minimum 6 znaków</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.email.maxLength">Zbyt długie, maximum 30 znaków</small>
                 </div>
             </div>
 
@@ -26,9 +26,9 @@
                 <label for="password" >Hasło: </label>
                 <input type="password" v-model.trim="$v.form.password.$model" class="form-control "  placeholder="Hasło">
                 <div v-if="$v.form.password.$dirty && submitted">
-                    <small class=" text-danger" v-if="!$v.form.password.required">To pole jest wymagane</small>
-                    <small class=" text-danger" v-if="!$v.form.password.minLength">Zbyt krótkie, minimum 6 znaków</small>
-                    <small class=" text-danger" v-if="!$v.form.password.maxLength">Zbyt długie, maximum 30 znaków</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.password.required">To pole jest wymagane</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.password.minLength">Zbyt krótkie, minimum 6 znaków</small>
+                    <small class=" text-danger d-block" v-if="!$v.form.password.maxLength">Zbyt długie, maximum 30 znaków</small>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 <label for="password" >Powtórz hasło: </label>
                 <input type="password" v-model.trim="$v.passwordRepeat.$model" class="form-control " placeholder="Powtórz hasło">
                 <div v-if="$v.passwordRepeat.$dirty">
-                    <small class=" text-danger" v-if="!$v.passwordRepeat.sameAs">Podane hasła różnią się</small>
+                    <small class=" text-danger d-block" v-if="!$v.passwordRepeat.sameAs">Podane hasła różnią się</small>
                 </div>
 
             </div>
