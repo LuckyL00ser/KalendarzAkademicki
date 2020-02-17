@@ -34,7 +34,7 @@ class EventController extends Controller
 
                     $userEvents = Event::with('course:id,name')->whereHas('course.participation', function ($query) use ($userId){
                                              $query->where('user_id',$userId);
-                                         })->select('id','name as title','start_time as start','end_time as end','note','course_id',DB::raw('FALSE as teacher'));
+                                         })->select('id','name as title','start_time as start','end_time as end','course_id','note',DB::raw('FALSE as teacher'));
                     $userTeacherEvents = Event::with('course:id,name')->whereHas('course', function ($query) use ($userId){
                                                      $query->where('user_id',$userId);
                                         })

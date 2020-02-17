@@ -1,11 +1,10 @@
 <template>
     <div>
         <navbar/>
-        <div class="container px-0 pt-sm-3 pt-3 pb-3">
-            <div class="col col-md-10 col-lg-8 col-xl-7 mx-auto px-1 overflow-hidden">
+        <div class="container px-0 pt-sm-3 pt-3 pb-3 overflow-hidden">
+            <div class="col col-md-10 col-lg-8 col-xl-7 mx-auto px-1 ">
                 <router-view />
             </div>
-
         </div>
         <div class="container col-sm-10 col-lg-6 col-md-8 fixed-bottom"  v-if="show">
             <div :class="[ `alert-${type}`, 'alert mx-2']" role="alert" >
