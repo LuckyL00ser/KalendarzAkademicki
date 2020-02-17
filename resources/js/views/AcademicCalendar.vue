@@ -2,8 +2,8 @@
     <div>
         <calendar :events="$store.state.events.userEvents" @eventClicked="goToEventView"/>
         <div class="mt-2">
-            <a class="legend-box normal mt-4">Kursy na które uczęszczasz</a>
-            <a class="legend-box teacher mt-2">Kursy które prowadzisz</a>
+            <a class="legend-box normal mt-4 d-block d-sm-inline">Kursy na które uczęszczasz</a>
+            <a class="legend-box teacher mt-2 d-block d-sm-inline">Kursy które prowadzisz</a>
         </div>
     </div>
 

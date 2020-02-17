@@ -3,12 +3,14 @@
         <div class="row">
             <router-link tag="div" to="/my-courses" class="col card py-5 m-1 border">
                 <h5>
-                    <i class="fas fa-clipboard-list mr-2"></i>Twoje kursy
+                    <i class="fas fa-clipboard-list mr-2 d-block d-sm-inline"></i>
+                    <span class="d-block d-sm-inline">Twoje kursy</span>
                 </h5>
             </router-link>
             <router-link tag="div" to="/courses" class="col card py-5 m-1 border">
                 <h5>
-                <i class="fas fa-search mr-2"></i>Przeglądarka kursów
+                <i class="fas fa-search mr-2 d-block d-sm-inline"></i>
+                <span class="d-block d-sm-inline">Przeglądarka kursów</span>
                 </h5>
             </router-link>
 

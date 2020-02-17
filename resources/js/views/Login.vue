@@ -1,6 +1,6 @@
 <template>
     <div class="row justify-content-center p-4">
-        <form @submit.prevent="login" class="col-12 col-sm-8 col-md-6">
+        <form @submit.prevent="login" class="col-12 col-sm-8 col-md-6 ">
             <div class="form-group row">
                 <label for="email">Email: </label>
                 <input type="email" v-model="form.email" class="form-control" placeholder="adres email">
@@ -33,7 +33,7 @@
             login(){
                 this.$store.dispatch('user/login',this.form).then(()=>{
                     this.$router.push('/');
-                }).catch((err)=>{});
+                });
             }
         },
     }

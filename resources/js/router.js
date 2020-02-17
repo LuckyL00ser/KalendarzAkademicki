@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ExampleComponent from './components/ExampleComponent'
 import Page404 from "./views/Page404";
 import Login from "./views/Login";
 import Register from "./views/Register";

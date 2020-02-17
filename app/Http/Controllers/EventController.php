@@ -23,7 +23,7 @@ class EventController extends Controller
 
                $courseEvents = Event::with('course:id,name')->whereHas('course', function ($query) use ($courseId) {
                                    $query->where('id', '=', $courseId);
-                               })->select('id','name as title','start_time as start','end_time as end','course_id')
+                               })->select('id','name as title','start_time as start','end_time as end','note','course_id')
                                ->get();
                 return response()->json([
                     "events"=>$courseEvents
@@ -34,11 +34,11 @@ class EventController extends Controller
 
                     $userEvents = Event::with('course:id,name')->whereHas('course.participation', function ($query) use ($userId){
                                              $query->where('user_id',$userId);
-                                         })->select('id','name as title','start_time as start','end_time as end','course_id',DB::raw('FALSE as teacher'));
+                                         })->select('id','name as title','start_time as start','end_time as end','note','course_id',DB::raw('FALSE as teacher'));
                     $userTeacherEvents = Event::with('course:id,name')->whereHas('course', function ($query) use ($userId){
                                                      $query->where('user_id',$userId);
                                         })
-                                        ->select('id','name as title','start_time as start','end_time as end','course_id',DB::raw('TRUE as teacher'))
+                                        ->select('id','name as title','start_time as start','end_time as end','course_id','note',DB::raw('TRUE as teacher'))
                                         ->union($userEvents)->get();
 
                     return response()->json([
@@ -56,7 +56,7 @@ class EventController extends Controller
                                 $event->start_time = $request->start_time;
                                 $event->end_time = $request->end_time;
                                 $event->course_id = $request->id;
-
+                                $event->note = $request->note;
                                 $event->save();
                                  return response()->json([
                                     "created_event"=>$event

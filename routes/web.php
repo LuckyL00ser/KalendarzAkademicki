@@ -10,10 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 
-Route::any('{all}', function () {
+
+Route::get('{any}', function () {
     return view('welcome');
-})
-->where(['all' => '.*']);
+})->where('any','.*');
 

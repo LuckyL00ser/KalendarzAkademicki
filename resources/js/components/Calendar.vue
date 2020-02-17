@@ -6,6 +6,7 @@
                   locale="pl"
                   :locales="locales"
                   height="auto"
+                  :header="header"
                   :button-icons="buttonIcons"
                   :column-header-format="columnFormat"
                   slot-duration="01:00:00"
@@ -51,6 +52,11 @@
                 },
                 columnFormat: {
                     weekday:'short'
+                },
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'prev,next'
                 },
                 buttonIcons:{
 
@@ -103,6 +109,12 @@
     }
     .teacher-event{
         background-color: #d2ecb2  !important;
+    }
+    .fc-view-container{
+        overflow-x: scroll;
+    }
+    .fc-view-container>*{
+        min-width:500px;
     }
 
 </style>

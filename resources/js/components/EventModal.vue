@@ -1,41 +1,60 @@
 <template>
-    <Modal v-on:done="createNewEvent" ref="modal" >
+    <Modal v-on:done="createNewEvent" ref="modal" @closed="eraseData">
         <template v-slot:modal-launch>Dodaj nowe zajęcia<i class="far fa-calendar-plus"></i></template>
         <template  v-slot:modal-title>Nowe wydarzenie</template>
         <template>
             <div>
-<!--                <FullCalendar id="new-calendar" :height="200" :plugins="calendarPlugins" locale="pl" :selectable="true"  :locales="locales" theme-system="bootstrap" @select="daySelected"/>-->
-
                 <form  @submit.prevent="createNewEvent" >
                     <div class="form-group">
                         <label>Nazwa wydarzenia</label>
-                        <input type="text" class="form-control w-100" placeholder="nazwa" v-model="course.name"/>
+                        <input type="text" class="form-control w-100" placeholder="nazwa" v-model.trim="$v.event.name.$model"/>
+                        <div v-if="$v.event.name.$dirty && submitted">
+                            <small class=" text-danger" v-if="!$v.event.name.required">To pole jest wymagane</small>
+                            <small class=" text-danger" v-if="!$v.event.name.minLength">Zbyt krótkie, minimum 4 znaki</small>
+                            <small class=" text-danger" v-if="!$v.event.name.maxLength">Zbyt długie, maximum 30 znaków</small>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Przedmiot:</label>
-                        <select class="form-control" v-model="course.id" :disabled="(!coursesAsTeacher.length||preselectedCourse)">
-
+                        <select class="form-control" v-model.trim="$v.event.id.$model" :disabled="(!coursesAsTeacher.length||preselectedCourse)">
                             <option selected disabled hidden value="">Wybierz przedmiot który prowadzisz</option>
                             <option v-for="course in coursesAsTeacher" :key="course.id" :value="course.id">{{course.name}}</option>
                         </select>
+                        <div v-if="$v.event.id.$dirty && submitted">
+                            <small class=" text-danger" v-if="!$v.event.id.required">To pole jest wymagane</small>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group col">
+                        <div class="form-group col-12 col-sm-4">
                             <label>Data: </label>
-                            <flat-pickr v-model="day" :config="configDay" class="form-control" placeholder="Wybierz dzień"></flat-pickr>
+                            <flat-pickr v-model.trim="$v.day.$model" :config="configDay" class="form-control" placeholder="Wybierz dzień"></flat-pickr>
+                            <div v-if="$v.day.$dirty && submitted">
+                                <small class=" text-danger" v-if="!$v.day.required">To pole jest wymagane</small>
+                            </div>
                         </div>
-                        <div class="form-group col">
+                        <div class="form-group col-6 col-sm-4">
                             <label>Czas rozpoczęcia: </label>
-                            <flat-pickr v-model="course.start_time" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
+                            <flat-pickr v-model.trim="$v.event.start_time.$model" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
+                            <div v-if="$v.event.start_time.$dirty && submitted">
+                                <small class=" text-danger" v-if="!$v.event.start_time.required">To pole jest wymagane</small>
+                            </div>
                         </div>
-                        <div class="form-group col">
+                        <div class="form-group col-6 col-sm-4">
                             <label>Czas zakończenia:</label>
-                            <flat-pickr v-model="course.end_time" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
+                            <flat-pickr v-model.trim="$v.event.end_time.$model" :config="configHour" class="form-control" placeholder="Wybierz godzinę"></flat-pickr>
+                            <div v-if="$v.event.end_time.$dirty && submitted">
+                                <small class=" text-danger" v-if="!$v.event.end_time.required">To pole jest wymagane</small>
+                                <small class=" text-danger" v-if="!$v.event.end_time.notTooEarly">Godzina zakończenia nie może być wcześniejsza niż {{event.start_time}}</small>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control w-100" placeholder="Dodatkowe informacje" v-model="course.note"/>
+                        <input type="text" class="form-control w-100" placeholder="Dodatkowe informacje" v-model.trim="$v.event.note.$model"/>
+                        <div v-if="$v.event.note.$dirty && submitted">
+                            <small class=" text-danger" v-if="!$v.event.note.maxLength">Zbyt długie, maximum 256 znaków</small>
+
+                        </div>
                     </div>
 
                 </form>
@@ -48,19 +67,18 @@
 
 <script>
     import Modal from './Modal'
-
-
+    import {required, minLength,maxLength} from 'vuelidate/lib/validators';
     import {mapState} from "vuex";
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
     import { Polish } from 'flatpickr/dist/l10n/pl.js'
+
     export default {
-        name: "NewCourse",
+        name: "EventModal",
         components: {Modal, flatPickr},
         props:['preselectedCourse'],
         data(){
             return {
-
                 configDay: {
                     locale: Polish,
                 },
@@ -72,35 +90,79 @@
                     time_24hr: true
                 },
                 day: null,
-                course: {
+                event: {
                     name: '',
                     start_time: null,
                     end_time: null,
                     id: null,
-                    note: ""
-                }
-
+                    note: ''
+                },
+                submitted: false,
             }
+        },
+        validations: {
+            day: {
+                required,
+            },
+            event: {
+                name: {
+                    required,
+                    minLength: minLength(4),
+                    maxLength: maxLength(30),
+                },
+                id:{
+                    required,
+                },
+                start_time: {
+                    required,
+                },
+                end_time: {
+                    required,
+                    notTooEarly: function(value){
+                        if(!this.event.start_time || !this.event.end_time)
+                            return true;
+                        const end = value.split(':');
+
+                        const start = this.event.start_time.split(':');
+                        if(end.length && start.length){
+                            if(end[0]>start[0])
+                                return true;
+                            else if(end[0]==start[0] && end[1]>start[1])
+                                return true;
+                            return false;
+                        }
+                    }
+                },
+                note: {
+                    maxLength: maxLength(256),
+                },
+            },
         },
         methods: {
             createNewEvent(){
-                this.course.start_time = `${this.day}T${this.course.start_time}:00Z`;
-                this.course.end_time = `${this.day}T${this.course.end_time}:00Z`;
-                this.$store.dispatch('events/createNewEvent',this.course)
-                    .then(()=>
-                    {
+                this.submitted=true;
+                this.$v.$touch();
+                if (!this.$v.$invalid) {
+                    this.event.start_time = `${this.day}T${this.event.start_time}:00Z`;
+                    this.event.end_time = `${this.day}T${this.event.end_time}:00Z`;
+                     this.$store.dispatch('events/createNewEvent',this.event)
+                         .then(()=>
+                       {
                             this.$emit('addedEvent');
                             this.eraseData();
                     });
-                this.$refs.modal.closeModal();
+                    this.$refs.modal.closeModal();
+                    this.$v.$reset();
+                }
+
 
             },
             eraseData(){
                 this.day= null,
-                 this.course= {
+                 this.event= {
                     name: '',
-                        start_time: null,
-                        end_time: null,
+                        start_time: '',
+                        end_time: '',
                         id: this.preselectedCourse?this.preselectedCourse.id:null,
                         note: ""
                 }
@@ -109,9 +171,8 @@
         mounted() {
             this.$store.dispatch('courses/getCoursesAsTeacher');
             if(this.preselectedCourse){
-                this.course = new Object({
-                    id: this.preselectedCourse.id
-                });
+                this.event.id = this.preselectedCourse.id
+
 
             }
 

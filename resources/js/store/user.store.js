@@ -50,7 +50,7 @@ const actions = {
                     dispatch('alert/success', 'Zalogowano', { root: true });
                     return;
                 }catch(error){
-                        dispatch('alert/error', `Błąd logowania: ${error}`, { root: true });
+                        dispatch('alert/error', 'Błędne dane logowania', { root: true });
                         commit('loginFailed');
                         throw error;
                 }

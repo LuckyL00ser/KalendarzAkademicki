@@ -4,7 +4,7 @@
         <course-list :availableCourses="allCourses" >
             <template v-slot:header>
 
-                <h2>Przeglądarka kursów</h2>
+                <h2 >Przeglądarka kursów</h2>
                 <NewCourse />
 
             </template>

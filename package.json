@@ -10,7 +10,11 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/core": "^7.8.4",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/preset-env": "^7.8.4",
         "axios": "^0.19",
+        "babel-loader": "^8.0.0-beta.1",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
@@ -26,14 +30,16 @@
         "vuex": "^3.1.2"
     },
     "dependencies": {
-        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
         "@fullcalendar/bootstrap": "^4.4.0",
         "@fullcalendar/core": "^4.4.0",
         "@fullcalendar/daygrid": "^4.4.0",
         "@fullcalendar/interaction": "^4.4.0",
         "@fullcalendar/timegrid": "^4.4.0",
         "@fullcalendar/vue": "^4.4.0",
+        "babel-polyfill": "^6.26.0",
         "flatpickr": "^4.6.3",
-        "vue-flatpickr-component": "^8.1.5"
-    }
+        "vue-flatpickr-component": "^8.1.5",
+        "vuelidate": "^0.7.5"
+    },
+    "browserslist": "> 0.25%, not dead"
 }

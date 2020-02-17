@@ -1,13 +1,16 @@
 <template>
     <div class="card">
-        <div class="card-header border-bottom d-flex justify-content-between">
+        <div class="card-header border-bottom d-flex justify-content-between flex-column flex-sm-row">
             <slot name="header"></slot>
         </div>
         <form class="card-body form-inline " @submit.prevent="">
             <div class="form-group flex-grow-1 mr-2 mb-0">
                 <input type="text" v-model="searchBar" class="form-control w-100" placeholder="Wyszukaj kurs">
             </div>
-            <div type="button" class="btn btn-primary"  @click="searchBar=''">Wyszyść<i class="fas fa-backspace"></i></div>
+            <div type="button" class="btn btn-primary"  @click="searchBar=''">
+                <span class="d-none d-sm-inline">Wyszyść</span>
+                <i class="fas fa-backspace"></i>
+            </div>
         </form>
         <p v-if="!showCourses.length" class="text-center">
             <slot name="no-courses">
@@ -65,5 +68,10 @@
 
     }
 </script>
-
+<style>
+    .list-group-item-action{
+        border-left: none;
+        border-right:none;
+    }
+</style>
 
