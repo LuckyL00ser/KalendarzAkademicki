@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="position-relative">
+        <loading-component :loading="$store.state.events.userEventsLoading"/>
         <calendar :events="$store.state.events.userEvents" @eventClicked="goToEventView"/>
         <div class="mt-2">
             <a class="legend-box normal mt-4 d-block d-sm-inline">Kursy na które uczęszczasz</a>
@@ -11,10 +12,11 @@
 
 <script>
     import Calendar from "../components/Calendar";
+    import LoadingComponent from "../components/LoadingComponent";
 
     export default {
         name: "AcademicCalendar",
-        components: {Calendar},
+        components: {LoadingComponent, Calendar},
         mounted(){
 
                 this.$store.dispatch('events/getUserEvents',this.courseId)
@@ -27,7 +29,7 @@
             goToEventView(eventId){
                 this.$router.push(`/event/${eventId}`)
             },
-        }
+        },
     }
 </script>
 

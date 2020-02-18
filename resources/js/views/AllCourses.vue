@@ -1,7 +1,7 @@
 <template>
 
 
-        <course-list :availableCourses="allCourses" >
+        <course-list :availableCourses="allCourses" :loading="coursesLoading" >
             <template v-slot:header>
 
                 <h2 >Przeglądarka kursów</h2>
@@ -20,7 +20,7 @@
         name: "AllCourses",
         components: {CourseList, NewCourse},
         computed: {
-            ...mapState('courses', ['allCourses']),
+            ...mapState('courses', ['allCourses','coursesLoading']),
         },
         mounted(){
             this.$store.dispatch('courses/getAllCourses');

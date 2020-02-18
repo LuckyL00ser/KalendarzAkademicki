@@ -1,9 +1,11 @@
 <template>
-    <div class="card">
+    <div class="card ">
+
         <div class="card-header ">
             <h2>Szczegóły wydarzenia</h2>
         </div>
-        <div class="card-body">
+        <div class="card-body position-relative">
+            <loading-component :loading="$store.state.events.eventLoading"/>
            <p>Przedmiot: <router-link  :to="`/course/${event.course.id}`">{{event.course.name}}</router-link></p>
             <p>Wydarzenie: <b>{{event.name}}</b></p>
             <p>Prowadzący: <b>{{event.course.user.name}}</b></p>
@@ -21,8 +23,10 @@
 </template>
 
 <script>
+    import LoadingComponent from "../components/LoadingComponent";
     export default {
         name: "EventView",
+        components: {LoadingComponent},
         data(){
             return {
                 event:{

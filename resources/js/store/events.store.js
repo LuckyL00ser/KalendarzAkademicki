@@ -25,11 +25,11 @@ const mutations = {
         state.coursesEventsLoading = true;
     },
     gettingCourseEventsDataFailed(state){
-        state.courseEventsLoading = false;
+        state.coursesEventsLoading = false;
     },
 
     eventGet(state,payload){
-        state.coursesLoading = false;
+        state.eventLoading = false;
         state.event = payload;
     },
     userEventsGet(state,payload){
@@ -37,7 +37,7 @@ const mutations = {
         state.userEvents = payload;
     },
     coursesEventsGet(state,payload) {
-        state.courseEventsLoading = false;
+        state.coursesEventsLoading = false;
         state.coursesEvents.set(payload.id, payload.data);
     }
 };

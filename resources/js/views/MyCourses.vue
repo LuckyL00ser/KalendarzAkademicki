@@ -1,6 +1,5 @@
 <template>
-
-        <course-list :availableCourses="userCourses" >
+        <course-list :availableCourses="userCourses" :loading="userCoursesLoading">
             <template v-slot:header>
                 <h2>Twoje kursy</h2>
             </template>
@@ -22,7 +21,7 @@
     export default {
         name: "MyCourses",
         components: {CourseList},
-        computed: {...mapState('courses', ['userCourses']),},
+        computed: {...mapState('courses', ['userCourses','userCoursesLoading']),},
         mounted(){
             this.$store.dispatch('courses/getUserCourses');
         }

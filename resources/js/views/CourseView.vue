@@ -1,6 +1,7 @@
 <template>
         <div>
-            <div class="card">
+            <div class="card position-relative">
+                <loading-component :loading="loading"/>
                 <div class="card-header ">
                     <h2>{{course.name}}</h2>
                 </div>
@@ -31,7 +32,8 @@
             </div>
             <div class="card mt-4">
                 <h2 class="card-header">Zajęcia dla przedmiotu:</h2>
-                <div class="card-body">
+                <div class="card-body position-relative">
+                    <loading-component :loading="$store.state.events.coursesEventsLoading"/>
                     <calendar :events="courseEvents" @eventClicked="goToEventView" />
                 </div>
             </div>
@@ -45,15 +47,17 @@
     import {getParticipationForCourse} from "../helpers/participations";
     import Calendar from "../components/Calendar";
     import EventModal from "../components/EventModal";
+    import LoadingComponent from "../components/LoadingComponent";
 
     export default {
         name: "CourseView",
-        components: {EventModal, Calendar},
+        components: {LoadingComponent, EventModal, Calendar},
         data(){
             return {
                 participate: false,
                 courseId: this.$route.params.id,
                 courseEvents: [],
+                loading: false,
                 course: {
                     name: "",
                     user: {
@@ -96,9 +100,11 @@
         },
 
         mounted() {
+            this.loading=true;
             getCourse(this.courseId)
             .then(response=>this.course=response.data.course)
             .catch(error=>this.$store.dispatch('alert/error',error))
+            .finally(()=>this.loading=false)
 
             this.getParticipation();
             this.fetchCourseEvents();
