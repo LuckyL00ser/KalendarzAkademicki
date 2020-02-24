@@ -9,6 +9,7 @@ import CourseView from "./views/CourseView";
 import MyCourses from "./views/MyCourses";
 import AcademicCalendar from "./views/AcademicCalendar";
 import EventView from "./views/EventView";
+import SemesterVIew from "./views/SemesterVIew";
 
 Vue.use(VueRouter)
 
@@ -65,6 +66,10 @@ const router =  new VueRouter({
         {
             path: '/register',
             component: Register
+        },
+        {
+            path:'/semester',
+            component: SemesterVIew,
         },
         {
             path: '/*',

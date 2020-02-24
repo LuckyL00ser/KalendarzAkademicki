@@ -71,7 +71,7 @@
     import {mapState} from "vuex";
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
-    import { Polish } from 'flatpickr/dist/l10n/pl.js'
+    import { Polish } from 'flatpickr/dist/l10n/pl.js';
 
     export default {
         name: "EventModal",

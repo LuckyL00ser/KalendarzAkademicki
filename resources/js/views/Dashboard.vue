@@ -21,7 +21,12 @@
                 <i class="far fa-calendar-alt mr-2"></i>Kalendarz zajęć
                 </h5>
             </router-link>
-
+            <router-link tag="div" to="/semester" class="col card py-5 m-1 border">
+                <h5>
+                    <i class="fas fa-tasks mr-2 d-block d-sm-inline"></i>
+                    <span class="d-block d-sm-inline">Zarządzanie semestrem</span>
+                </h5>
+            </router-link>
         </div>
     </div>
 </template>

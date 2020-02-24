@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 require('./bootstrap');
+
 import Vue from "vue";
 import router from "./router";
 import MainApp from "./components/MainApp";
@@ -21,7 +22,10 @@ router.beforeEach((to,from,next)=>{
 
 });
 
+
 Vue.use(Vuelidate);
+
+
 
 const app = new Vue({
     el: '#app',

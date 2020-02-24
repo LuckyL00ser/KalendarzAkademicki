@@ -1,6 +1,6 @@
 <template>
     <div @keyup.esc="closeModal">
-        <button type="button" class="btn btn-outline-primary" @click="showModal">
+        <button type="button" class="btn btn-outline-primary" @click="showModal" v-if="!disableLauncher">
             <slot name="modal-launch"></slot>
         </button>
         <div :class="[ show?'display-modal ':'', 'modal fade show' ]" tabindex="-1" role="dialog">
@@ -35,7 +35,13 @@
 
 <script>
     export default {
-        name: "NewCourse",
+        name: "Modal",
+        props: {
+            disableLauncher: {
+                type: Boolean,
+                default: false,
+            }
+        },
         data(){
             return{
                 show: false,

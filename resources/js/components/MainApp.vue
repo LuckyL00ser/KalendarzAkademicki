@@ -41,7 +41,7 @@
 </script>
 
 <style >
-    .btn i{
+    .btn:not(.rounded-circle) i{
         margin-left:4px;
     }
 
