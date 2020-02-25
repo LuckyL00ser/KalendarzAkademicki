@@ -4,6 +4,7 @@ import {user} from './user.store'
 import {alert} from './alert.store'
 import {courses} from "./courses.store";
 import events from "./events.store";
+import {semester} from "./semester.store";
 
 Vue.use(Vuex);
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
         alert,
         user,
         courses,
-        events
+        events,
+        semester
     },
 });
 

@@ -7,9 +7,9 @@ import Dashboard from "./views/Dashboard";
 import AllCourses from "./views/AllCourses";
 import CourseView from "./views/CourseView";
 import MyCourses from "./views/MyCourses";
-import AcademicCalendar from "./views/AcademicCalendar";
+import AcademicCalendar from "./views/LessonsCalendar";
 import EventView from "./views/EventView";
-import SemesterVIew from "./views/SemesterVIew";
+import SemesterVIew from "./views/SemesterView";
 
 Vue.use(VueRouter)
 

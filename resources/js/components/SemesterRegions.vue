@@ -5,10 +5,10 @@
         </div>
         <div class="list-group mb-2">
 
-            <div class="list-group-item list-group-item-action px-1 " v-for="(period,index) in periods" :style="`background-color: ${period.color};`" >
+            <div class="list-group-item list-group-item-action " v-for="(period,index) in periods" :style="`background-color: ${period.color};`" >
                     <div class="d-flex form-inline"   >
                     <h6 class="mb-0 flex-grow-1">{{period.name}}</h6>
-                    <button class="btn btn-danger  ml-2 p-1" v-if="index!=0" @click="removePeriod(index)">
+                    <button class="btn btn-danger  ml-2 p-1"  @click="$emit('removePeriod',index)">
 
                         <i class="far fa-trash-alt ml-0"></i>
                     </button>
@@ -27,7 +27,7 @@
             </div>
 
         </div>
-        <NewPeriod @newPeriod="periods.push($event)"/>
+        <NewPeriod @newPeriod="$emit('newPeriod',$event)"/>
     </div>
 </template>
 
@@ -47,22 +47,6 @@
             }
         },
         methods:{
-
-            removePeriod(index){
-                this.periods.splice(index,1);
-            },
-            removePart(index){
-                this.newPeriod.parts.splice(index,1);
-            },
-            isExpanded(key) {
-                return this.expandedGroup.indexOf(key) !== -1;
-            },
-            toggleExpansion(key) {
-                if (this.isExpanded(key))
-                    this.expandedGroup.splice(this.expandedGroup.indexOf(key), 1);
-                else
-                    this.expandedGroup.push(key);
-            },
             getRegions(){
                 return this.periods;
             }

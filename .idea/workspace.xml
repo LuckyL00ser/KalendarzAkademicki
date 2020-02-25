@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad291dc7-b3d2-4dee-9bf1-8512ea4f48d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/helpers/semester.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/store/semester.store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/NewSemester.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NewSemester.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SemesterManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SemesterManager.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/SemesterRegions.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/SemesterRegions.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/aCalendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/AcademicCalendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/AcademicCalendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/LessonsCalendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/SemesterVIew.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/SemesterView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -68,8 +78,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.production" />
         <item itemvalue="npm.watch" />
+        <item itemvalue="npm.production" />
       </list>
     </recent_temporary>
   </component>
@@ -112,6 +122,7 @@
       <workItem from="1582500000401" duration="7076000" />
       <workItem from="1582507702271" duration="2502000" />
       <workItem from="1582512490481" duration="158000" />
+      <workItem from="1582634646053" duration="8350000" />
     </task>
     <servers />
   </component>
@@ -151,10 +162,10 @@
     <state width="1515" height="125" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582507144703" />
     <state width="1515" height="125" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582480602523" />
     <state width="1899" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582153500284" />
-    <state x="444" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1582512490182">
+    <state x="444" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1582634646653">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="444" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582512490182" />
+    <state x="444" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582634646653" />
     <state x="444" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580048867096" />
     <state x="555" y="300" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582192455619" />
     <state x="453" y="128" width="631" height="568" key="find.popup" timestamp="1582395625539">
@@ -162,10 +173,10 @@
     </state>
     <state x="453" y="128" width="631" height="568" key="find.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582395625539" />
     <state x="453" y="128" width="631" height="568" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1580378565136" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1581869027645">
+    <state x="425" y="187" key="run.anything.popup" timestamp="1582643731599">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1581869027645" />
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1582643731599" />
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1579687047710" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1579685353257">
       <screen x="0" y="0" width="1536" height="824" />

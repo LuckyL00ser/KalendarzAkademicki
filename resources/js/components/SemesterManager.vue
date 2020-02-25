@@ -2,14 +2,14 @@
     <div class="card">
         <div class="card-header border-bottom d-flex justify-content-between flex-column flex-sm-row">
             <h2 >Lista semestrów</h2>
-            <NewSemester @createdNewSemester="addSemesterToList"/>
+            <NewSemester @newSemesterCreated="addNewSemester"/>
         </div>
 
         <div class="form-group card-body">
 <!--            <loading-component :loading="loading"/>-->
 
-            <select class="form-control" @change="handleSelect" v-model="selected">
-                <option  v-for="semester in semesters" :value="semester">{{semester.name}}</option>
+            <select class="form-control" @change="$emit('selectedSemesterIndex',selected)" v-model="selected">
+                <option  v-for="(semester,index) in semesters" :value="index">{{semester.name}}</option>
             </select>
 
 
@@ -26,18 +26,17 @@
         data(){
             return {
                 selected: null,
-                semesters: [
-
-                ],
             }
         },
+        computed: {
+          semesters(){
+              return this.$store.state.semester.semesters;
+          }
+        },
         methods:{
-            addSemesterToList(newSemester){
-                this.semesters.push(newSemester);
+            addNewSemester(newSemester){
+                this.$store.dispatch('semester/addSemester',newSemester);
             },
-            handleSelect(){
-                this.$emit('selectedSemester',this.selected)
-            }
 
         },
     }

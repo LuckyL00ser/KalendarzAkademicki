@@ -1,5 +1,14 @@
 <template>
    <div class="calendar ">
+       <add-to-period ref="periodAdd"
+                      :min_date="start_date"
+                      :max_date="end_date"
+                      :regions="regions"
+                      :preloadStart="dragStartDay"
+                      :preloadEnd="dragEndDay"
+                      :single="single"
+                      @addPeriod="addPeriod"
+                      @canceled="finishDrag"/>
 
        <div class="calendar-container" :style="`grid-template-columns: 50px repeat(${weeks},1fr)`">
            <div class="top-bar  d-flex justify-content-around" >
@@ -37,8 +46,18 @@
 </template>
 
 <script>
-
+    import AddToPeriod from "../components/AddToPeriod";
     export default {
+        name: "AcademicCalendar",
+        data(){
+            return {
+                dragging: false,
+                dragStartDay: null,
+                dragEndDay: null,
+                single: false,
+            }
+        },
+        components: {AddToPeriod},
         props: {
             start_date:{
                 type: Date,
@@ -48,46 +67,60 @@
                 type: Date,
                 default: ()=>new Date(),
             },
-            days: {
+            regions:{
                 type: Array,
-                default: ()=>[],
+                default: ()=>[]
             }
         },
         methods: {
           dragStart(event,day){
-              this.dragging=true;
               this.dragStartDay = day;
-
+              this.single=false;
+              this.dragging=true;
 
           },
             dragOver(event,day){
                 this.dragEndDay= day;
-
-
-            },
-            dragEnd(){
-              if(this.dragStartDay>this.dragEndDay)
-                  this.$emit('dragEnded',{start:this.dragEndDay,end:this.dragStartDay})
-                else
-                   this.$emit('dragEnded',{start:this.dragStartDay,end:this.dragEndDay})
             },
             finishDrag(){
                 this.dragging=false;
                 this.dragEndDay=null;
                 this.dragStartDay=null;
             },
+            dragEnd(){
+                if(this.dragStartDay>this.dragEndDay)
+                    {let x = this.dragStartDay;
+                    this.dragStartDay = this.dragEndDay;
+                    this.dragEndDay = x;
+                    this.single=false}
+
+                this.$refs.periodAdd.openModal();
+
+            },
             dateClicked(day){
-              if(day>=this.start_date && day<=this.end_date)
-                  this.$emit('dateClicked',{start:day})
-            }
-        },
-        name: "aCalendar",
-        data(){
-          return {
-                dragging: false,
-              dragStartDay: null,
-              dragEndDay: null,
-          }
+
+              if(day>=this.start_date && day<=this.end_date){
+                  this.dragStartDay = day;
+                  this.single=true;
+                  this.$refs.periodAdd.openModal();
+              }
+            },
+            addPeriod(data){
+                this.finishDrag();
+                // let index = 0;
+                // let start = new Date(data.start);
+                //
+                // while(start.getTime()!=this.days[index].getTime())
+                //     index++;
+                // if(!isNaN(data.end)){
+                //     for(;start<=data.end;start.setDate(start.getDate()+1))
+                //     {
+                //         this.days[index].color = this.regions[data.period].color;
+                //         index++;
+                //     }
+                // }else
+                //     this.days[index].color = this.region[data.period].color;
+            },
         },
         computed:{
             today(){
@@ -101,6 +134,16 @@
             },
             weeks(){
                 return Math.ceil((this.renderEnd-this.renderStart)/(1000*60*60*24*7))+(this.weekDelay.length?1:0);
+            },
+            days(){
+                //generate days for full month(s)
+                let x = [];
+                let start = new Date(this.renderStart.getTime());
+                while(start<=this.renderEnd){
+                    x.push(new Date(start.getTime()));
+                    start.setDate(start.getDate()+1)
+                }
+                return x;
             },
             months(){
                 let x=[];
@@ -161,7 +204,7 @@
         color: #af1316 ;
     }
     .week-day-label{
-        background-color: #3490dc;
+        background-color: #acc4d980;
         font-weight: bold;
         margin:-1px;
     }

@@ -21,20 +21,20 @@
                 <div class="row">
                     <div class="form-group col-6 ">
                         <label>Dzień rozpoczęcia: </label>
-                        <flat-pickr v-model.trim="$v.semester.start_time.$model" :config="configDay" class="form-control" placeholder="Dzień rozpoczęcia"></flat-pickr>
+                        <flat-pickr v-model.trim="$v.semester.startDate.$model" :config="configDay" class="form-control" placeholder="Dzień rozpoczęcia"></flat-pickr>
 
-                        <div v-if="$v.semester.start_time.$dirty && submitted">
-                            <small class=" text-danger d-block" v-if="!$v.semester.start_time.required">To pole jest wymagane</small>
+                        <div v-if="$v.semester.startDate.$dirty && submitted">
+                            <small class=" text-danger d-block" v-if="!$v.semester.startDate.required">To pole jest wymagane</small>
                         </div>
                     </div>
                     <div class="form-group col-6 ">
                         <label>Dzień zakończenia:</label>
-                        <flat-pickr v-model.trim="$v.semester.end_time.$model" :config="configDay" class="form-control" placeholder="Dzień zakończenia"></flat-pickr>
+                        <flat-pickr v-model.trim="$v.semester.endDate.$model" :config="configDay" class="form-control" placeholder="Dzień zakończenia"></flat-pickr>
 
-                        <div v-if="$v.semester.end_time.$dirty && submitted">
-                            <small class=" text-danger d-block" v-if="!$v.semester.end_time.required">To pole jest wymagane</small>
-                            <small class=" text-danger d-block" v-if="!$v.semester.end_time.notTooEarly">
-                                Dzień zakończenia nie może być wcześniejszy niż {{semester.start_time}}</small>
+                        <div v-if="$v.semester.endDate.$dirty && submitted">
+                            <small class=" text-danger d-block" v-if="!$v.semester.endDate.required">To pole jest wymagane</small>
+                            <small class=" text-danger d-block" v-if="!$v.semester.endDate.notTooEarly">
+                                Dzień zakończenia nie może być wcześniejszy niż {{semester.startDate}}</small>
                         </div>
                     </div>
                 </div>
@@ -52,6 +52,7 @@
     import {Polish} from "flatpickr/dist/l10n/pl";
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
+    import {defaultSemesterRegions} from "../helpers/semester";
 
     export default {
         name: "NewSemester",
@@ -63,21 +64,10 @@
                 },
                 semester: {
                     name: '',
-                    start_time: null,
-                    end_time: null,
+                    startDate: null,
+                    endDate: null,
                     regions: [
-                        {
-                            name: 'Zajęcia odbywają się normalnie',
-                            color:'#5ba80e',
-                        },
-                        {
-                            name: 'Ferie',
-                            color:'#8be8e8',
-                        },
-                        {
-                            name: 'Przerwa świąteczna',
-                            color:'#fc9a2c',
-                        },
+                       ...defaultSemesterRegions
                     ],
 
                 },
@@ -90,15 +80,15 @@
                 name: {
                     required,
                 },
-                start_time: {
+                startDate: {
                     required,
                 },
-                end_time: {
+                endDate: {
                     required,
                     notTooEarly: function(value){
-                        if(!value || ! this.semester.start_time)
+                        if(!value || ! this.semester.startDate)
                             return true;
-                        return new Date(...value.split('-')) >= new Date(...this.semester.start_time.split('-'))
+                        return new Date(...value.split('-')) >= new Date(...this.semester.startDate.split('-'))
                     }
                 },
             },
@@ -109,49 +99,27 @@
                 this.$v.$touch();
 
                 if (!this.$v.$invalid) {
-                    this.semester.name = `${this.semester.name} ${this.semester.start_time.split('-')[0]}/${this.semester.end_time.split('-')[0]}`
-                    this.semester.start_time = new Date(...this.semester.start_time.split('-'));
-                    this.semester.start_time.setMonth(this.semester.start_time.getMonth()-1)
-                    this.semester.end_time = new Date(...this.semester.end_time.split('-'));
-                    this.semester.end_time.setMonth(this.semester.end_time.getMonth()-1)
-                    let x = [];
-                    let start = new Date(this.semester.start_time.getFullYear(),this.semester.start_time.getMonth());
-                    let end = new Date(this.semester.end_time.getFullYear(),this.semester.end_time.getMonth()+1,0)
-                    while(start<=end){
-                         x.push(new Date(start.getTime()));
-                         start.setDate(start.getDate()+1)
-                    }
-                    this.semester.days = [...x]
-                    this.$emit('createdNewSemester',this.semester)
+                    this.semester.name = `${this.semester.name} ${this.semester.startDate.split('-')[0]}/${this.semester.endDate.split('-')[0]}`
+                    this.semester.startDate = new Date(...this.semester.startDate.split('-'));
+                    this.semester.startDate.setMonth(this.semester.startDate.getMonth()-1)
+                    this.semester.endDate = new Date(...this.semester.endDate.split('-'));
+                    this.semester.endDate.setMonth(this.semester.endDate.getMonth()-1)
 
+                    this.$emit('newSemesterCreated',this.semester);
 
                     this.$refs.modal.closeModal();
                     this.submitted=false;
                     this.$v.$reset();
                 }
-
-
             },
             eraseData(){
                     this.submitted=false;
                     this.semester= {
                         name: '',
-                        start_time: '',
-                        end_time: '',
-                        days: [],
+                        startDate: null,
+                        endDate: null,
                         regions: [
-                            {
-                                name: 'Zajęcia odbywają się normalnie',
-                                color:'#5ba80e',
-                            },
-                            {
-                                name: 'Ferie',
-                                color:'#8be8e8',
-                            },
-                            {
-                                name: 'Przerwa świąteczna',
-                                color:'#fc9a2c',
-                            },
+                            ...defaultSemesterRegions
                         ],
                     }
             }
